@@ -31,12 +31,11 @@ jobs:
     - name: Install Railway CLI
       run: |
         curl -fsSL https://railway.app/install.sh | sh
-        railway --version  # Verify installation
 
     - name: Deploy to Railway
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         M_STRING: ${{ secrets.M_STRING }}
       run: |
-        railway login --token $RAILWAY_TOKEN
-        railway up --service test
+        RAILWAY_TOKEN=$RAILWAY_TOKEN railway login
+        M_STRING=$M_STRING railway up --service test
