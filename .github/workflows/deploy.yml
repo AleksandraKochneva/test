@@ -37,4 +37,4 @@ jobs:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         M_STRING: ${{ secrets.m_string }}
       run: |
-        RAILWAY_TOKEN=$RAILWAY_TOKEN railway up --service test
+        RAILWAY_TOKEN=$RAILWAY_TOKEN M_STRING=$M_STRING railway up --service test
