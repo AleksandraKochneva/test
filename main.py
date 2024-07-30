@@ -1,14 +1,19 @@
+import os
+
 from flask import Flask
 from pymongo import MongoClient, errors
 
 app = Flask(__name__)
 
+app.secret_key = 'supersecretkey'
+
+m_string = os.getenv('m_string')
 
 @app.route('/')
 def index():
     try:
         # Attempt to connect to MongoDB
-        client = MongoClient("mongodb+srv://saleuzi4:PbKd7gLKT70VK0wD@cluster0.2mmbfbi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", serverSelectionTimeoutMS=1000)
+        client = MongoClient(m_string, serverSelectionTimeoutMS=1000)
         client.admin.command('ping')  # Check the connection
         message = "Successfully connected to MongoDB!"
     except errors.ServerSelectionTimeoutError:
