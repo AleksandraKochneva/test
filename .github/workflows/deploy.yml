@@ -18,12 +18,12 @@ jobs:
       with:
         python-version: '3.12'
 
-    - name: Install dependencies
+    - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Install Node.js
+    - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
         node-version: '16'
@@ -31,10 +31,12 @@ jobs:
     - name: Install Railway CLI
       run: |
         curl -fsSL https://railway.app/install.sh | sh
+        railway --version  # Verify installation
 
-    - name: Link and Deploy to Railway
+    - name: Deploy to Railway
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        M_STRING: ${{ secrets.m_string }}
+        M_STRING: ${{ secrets.M_STRING }}
       run: |
-        RAILWAY_TOKEN=$RAILWAY_TOKEN M_STRING=$M_STRING railway up --service test
+        railway login --token $RAILWAY_TOKEN
+        railway up --service test
