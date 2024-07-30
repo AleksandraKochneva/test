@@ -15,9 +15,9 @@ def index():
         print(f"MongoDB Connection String: {m_string}")  # Debug output
         client = MongoClient(m_string, serverSelectionTimeoutMS=1000)
         client.admin.command('ping')  # Check the connection
-        message = "Successfully connected to MongoDB!"
+        message = f"Successfully connected to MongoDB with {m_string}!"
     except errors.ServerSelectionTimeoutError:
-        message = "Failed to connect to MongoDB."
+        message = f"Failed to connect to MongoDB with {m_string}."
 
     return f"<h1>{message}</h1>"
 
