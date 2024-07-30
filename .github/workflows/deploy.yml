@@ -35,6 +35,6 @@ jobs:
     - name: Link and Deploy to Railway
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-#        M_STRING: ${{ secrets.m_string }}
+        M_STRING: ${{ secrets.m_string }}
       run: |
         RAILWAY_TOKEN=$RAILWAY_TOKEN railway up --service test
