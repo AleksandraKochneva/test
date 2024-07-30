@@ -12,7 +12,7 @@ m_string = os.getenv('m_string')
 @app.route('/')
 def index():
     try:
-        # Attempt to connect to MongoDB
+        print(f"MongoDB Connection String: {m_string}")  # Debug output
         client = MongoClient(m_string, serverSelectionTimeoutMS=1000)
         client.admin.command('ping')  # Check the connection
         message = "Successfully connected to MongoDB!"
@@ -20,6 +20,7 @@ def index():
         message = "Failed to connect to MongoDB."
 
     return f"<h1>{message}</h1>"
+
 
 
 if __name__ == '__main__':
